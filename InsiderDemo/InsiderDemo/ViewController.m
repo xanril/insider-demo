@@ -11,6 +11,50 @@
     [super viewDidLoad];
     
 }
+- (IBAction)triggerLoginOnClick:(UIButton *)sender {
+    
+    InsiderUser *currentUser = [Insider getCurrentUser];
+    
+    currentUser.setName(@"First")
+        .setSurname(@"User");
+    
+    InsiderIdentifiers *identifiers = [[InsiderIdentifiers alloc] init];
+    identifiers.addEmail(@"first@user.com");
+    
+    [currentUser login:identifiers];
+}
+- (IBAction)triggerSwitchUserOptInOnClick:(UIButton *)sender {
+    
+    InsiderUser *currentUser = [Insider getCurrentUser];
+    
+    // logout the current user
+    [currentUser logout];
+    
+    
+    // login another user and toggle email opt-in
+    currentUser.setName(@"Second")
+        .setSurname(@"User")
+        .setEmailOptin(true);
+    
+    InsiderIdentifiers *identifiers = [[InsiderIdentifiers alloc] init];
+    identifiers.addEmail(@"second@user.com");
+    
+    [currentUser login:identifiers];
+    
+    
+    // we then logout second user
+    [currentUser logout];
+    
+    
+    // and we login the first user back.
+    currentUser.setName(@"First")
+        .setSurname(@"User");
+    
+    InsiderIdentifiers *identifiersFirstUser = [[InsiderIdentifiers alloc] init];
+    identifiers.addEmail(@"first@user.com");
+    
+    [currentUser login:identifiersFirstUser];
+}
 
 - (IBAction)tirggerButtonOnClick:(UIButton *)sender {
     
