@@ -30,30 +30,28 @@
     // logout the current user
     [currentUser logout];
     
-    
-    // login another user and toggle email opt-in
-    currentUser.setName(@"Second")
-        .setSurname(@"User")
-        .setEmailOptin(true);
-    
+    // login another user
     InsiderIdentifiers *identifiers = [[InsiderIdentifiers alloc] init];
     identifiers.addEmail(@"second@user.com");
     
     [currentUser login:identifiers];
     
+    // toggle email opt-in
+    currentUser.setName(@"Second")
+        .setSurname(@"User")
+        .setEmailOptin(true);
     
-    // we then logout second user
+    // then logout second user
     [currentUser logout];
     
-    
     // and we login the first user back.
-    currentUser.setName(@"First")
-        .setSurname(@"User");
-    
     InsiderIdentifiers *identifiersFirstUser = [[InsiderIdentifiers alloc] init];
     identifiers.addEmail(@"first@user.com");
     
     [currentUser login:identifiersFirstUser];
+    
+    currentUser.setName(@"First")
+        .setSurname(@"User");
 }
 
 - (IBAction)tirggerButtonOnClick:(UIButton *)sender {
